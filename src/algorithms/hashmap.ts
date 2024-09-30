@@ -20,29 +20,59 @@
 // In TypeScript, hashmaps are typically implemented using objects or classes.
 // Here is an example of a hashmap class in TypeScript:
 
-const myHashMap: { [key:string]: number } = {
-    "apple": 5,
-    "banana": 10,
-    "cherry": 15
-};
+// const myHashMap: { [key:string]: number } = {
+//     "apple": 5,
+//     "banana": 10,
+//     "cherry": 15
+// };
 
-// Accessing values in a hashmap is done by using the key as an index:
-console.log(myHashMap["apple"]); // Output: 5
-console.log(myHashMap["banana"]); // Output: 10
+// // Accessing values in a hashmap is done by using the key as an index:
+// console.log(myHashMap["apple"]); // Output: 5
+// console.log(myHashMap["banana"]); // Output: 10
 
-// Adding values to a hashmap is done by assigning a value to a key:
-myHashMap["orange"] = 20;
+// // Adding values to a hashmap is done by assigning a value to a key:
+// myHashMap["orange"] = 20;
 
-// Deleting values from a hashmap is done by using the delete keyword:
-delete myHashMap["banana"];
+// // Deleting values from a hashmap is done by using the delete keyword:
+// delete myHashMap["banana"];
 
-// Iterating over the keys and values in a hashmap is done using a for...in loop:
-for (const key in myHashMap) {
-    console.log(key, myHashMap[key]);
-}
+// // Iterating over the keys and values in a hashmap is done using a for...in loop:
+// for (const key in myHashMap) {
+//     console.log(key, myHashMap[key]);
+// }
 
-if ("orange" in myHashMap) {
-    console.log("Orange is in the hashmap");
-} else {
-    console.log("Orange is not in the hashmap");
+// if ("orange" in myHashMap) {
+//     console.log("Orange is in the hashmap");
+// } else {
+//     console.log("Orange is not in the hashmap");
+// }
+
+export class HashMap<Key, Value> {
+    private map: { [key: string]: Value } = {};
+
+    // set method to add key-value pairs to the hashmap
+    set(key: Key, value: Value): void {
+        const stringKey = JSON.stringify(key);
+        this.map[stringKey] = value;
+    }
+
+    get(key: Key): Value | undefined {
+        const stringKey = JSON.stringify(key);
+        return this.map[stringKey];
+    }
+
+    has(key: Key): boolean {
+        const stringKey = JSON.stringify(key);
+        return stringKey in this.map;
+    }
+
+    delete(key: Key): boolean {
+        const stringKey = JSON.stringify(key);
+        if (this.has(key)) {
+            delete this.map[stringKey];
+            return true;
+        }
+        return false;
+    }
+
 }
