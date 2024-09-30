@@ -8,7 +8,7 @@ class StackNode<T> {
     }
 }
 
-class Stack<T>{
+export default class Stack<T>{
     private top: StackNode<T> | null;
 
     constructor() {
